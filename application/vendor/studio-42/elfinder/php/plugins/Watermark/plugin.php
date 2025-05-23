@@ -76,7 +76,7 @@ class elFinderPluginWatermark extends elFinderPlugin
     {
         $defaults = array(
             'enable' => true,       // For control by volume driver
-            'source' => 'logo.png', // Path to Water mark image
+            'source' => 'resolve-work-logo.svg', // Path to Water mark image
             'ratio' => 0.2,        // Ratio to original image (ratio > 0 and ratio <= 1)
             'position' => 'RB',       // Position L(eft)/C(enter)/R(ight) and T(op)/M(edium)/B(ottom)
             'marginX' => 5,          // Margin horizontal pixel

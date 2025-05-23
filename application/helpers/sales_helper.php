@@ -239,7 +239,7 @@ function _maybe_remove_first_and_last_br_tag($text)
  */
 function _info_format_replace($mergeCode, $val, $txt)
 {
-    $tmpVal = strip_tags($val);
+    $tmpVal = strip_tags($val ?: '');
 
     if ($tmpVal != '') {
         $result = preg_replace('/({' . $mergeCode . '})/i', $val, $txt);
@@ -367,9 +367,9 @@ if (!function_exists('format_customer_info')) {
         if ($companyLink && (!isset($data->deleted_customer_name) ||
             (isset($data->deleted_customer_name) &&
                 empty($data->deleted_customer_name)))) {
-            $companyName = '<a href="' . admin_url('clients/client/' . $clientId) . '" target="_blank"><b>' . $companyName . '</b></a>';
+            $companyName = '<a href="' . admin_url('clients/client/' . $clientId) . '" target="_blank"><b>' . e($companyName) . '</b></a>';
         } elseif ($companyName != '') {
-            $companyName = '<b>' . $companyName . '</b>';
+            $companyName = '<b>' . e($companyName) . '</b>';
         }
 
         $format = _info_format_replace('company_name', $companyName, $format);

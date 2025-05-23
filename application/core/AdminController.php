@@ -47,9 +47,9 @@ class AdminController extends App_Controller
         if (!$this->input->is_ajax_request()) {
             if (ENVIRONMENT == 'production' && is_admin()) {
                 if ($this->config->item('encryption_key') === '') {
-                    die('<h1>Encryption key not sent in application/config/app-config.php</h1>For more info visit <a href="https://help.exampleperfexcrm.com/encryption-key-explained/">encryption key explained</a>');
+                    die('<h1>Encryption key not sent in application/config/app-config.php</h1>For more info visit <a href="https://help.resolveworkcrm.com/encryption-key-explained/">encryption key explained</a>');
                 } elseif (strlen($this->config->item('encryption_key')) != 32) {
-                    die('<h1>Encryption key length should be 32 charachters</h1>For more info visit <a href="https://help.exampleperfexcrm.com/encryption-key-explained/">encryption key explained</a>');
+                    die('<h1>Encryption key length should be 32 charachters</h1>For more info visit <a href="https://help.resolveworkcrm.com/encryption-key-explained/">encryption key explained</a>');
                 }
             }
 
@@ -172,7 +172,7 @@ class AdminController extends App_Controller
                 'onclick' => 'init_lead(); return false;',
             ],
             'position' => 45,
-            'icon'     => 'fa-solid fa-tty',
+            'icon'     => 'fa-solid fa-crosshairs',
         ]);
 
         $this->app->add_quick_actions_link([

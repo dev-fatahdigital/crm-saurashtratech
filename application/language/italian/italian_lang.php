@@ -15,7 +15,7 @@ $lang['deleted']              = '%s cancellato';
 $lang['problem_deleting']     = 'Problema cancellato %s';
 $lang['is_referenced']        = 'L\'ID di %s è già stato usato.';
 $lang['close']                = 'Chiudi';
-$lang['send']                 = 'Invia';
+$lang['send']            = 'Invia';
 $lang['cancel']               = 'Cancella';
 $lang['go_back']              = 'Indietro';
 $lang['error_uploading_file'] = 'Errore caricamento file';
@@ -3946,3 +3946,144 @@ $lang['payment_attempt_amount']                             = 'Invoice Total';
 $lang['payment_attempt_fee']                                = 'Payment Fee';
 $lang['feature']                                            = 'Feature';
 $lang['capabilities']                                       = 'Capabilities';
+
+# Version 3.1.0
+$lang['filter_boolean_yes'] = 'Yes';
+$lang['filter_boolean_no'] = 'No';
+$lang['filter_matchtype_and'] = 'and';
+$lang['filter_matchtype_or'] = 'or';
+$lang['filter_share'] = 'Share with other team members?';
+$lang['filter_mark_as_default'] = 'Mark as default';
+$lang['filter_unmark_as_default'] = 'Unmark as default';
+$lang['filter_save'] = 'Save Filter';
+$lang['filter_name'] = 'Filter name';
+$lang['filter_apply'] = 'Apply';
+$lang['filter_apply_and_save'] = 'Apply and Save';
+$lang['filter_use_dynamic_dates'] = 'Use dynamic dates';
+$lang['filter_new'] = 'New Filter';
+$lang['filter_clear_active'] = 'Clear Filter';
+$lang['filter_edit'] = 'Edit';
+$lang['filter_create'] = 'Create Filter';
+$lang['filter_update'] = 'Update Filter';
+$lang['filter_delete'] = 'Delete Filter';
+$lang['filter_cannot_be_shared'] = 'This filter cannot be shared with other team members as it contains rules that may not be available for all users.';
+$lang['filter_add_rule'] = 'Add Rule';
+
+$lang['filter_operator_is_empty'] = 'is unknown';
+$lang['filter_operator_is_not_empty'] = 'is known';
+$lang['filter_operator_equal'] = 'equal';
+$lang['filter_operator_not_equal'] = 'not equal';
+$lang['filter_operator_begins_with'] = 'begins with';
+$lang['filter_operator_not_begins_with'] = 'not begins with';
+$lang['filter_operator_contains'] = 'contains';
+$lang['filter_operator_not_contains'] = 'not contains';
+$lang['filter_operator_ends_with'] = 'ends with';
+$lang['filter_operator_not_ends_with'] = 'not ends with';
+$lang['filter_operator_in'] = 'in';
+$lang['filter_operator_not_in'] = 'not in';
+$lang['filter_operator_between'] = 'between';
+$lang['filter_operator_not_between'] = 'not between';
+$lang['filter_operator_dynamic'] = 'dynamic';
+$lang['filter_operator_greater'] = 'greater';
+$lang['filter_operator_greater_or_equal'] = 'greater or equal';
+$lang['filter_operator_less'] = 'less';
+$lang['filter_operator_less_or_equal'] = 'less or equal';
+$lang['no_filters_found'] = 'No saved filters, get started by creating a new filter.';
+
+$lang['staff_logged_in_public_ticket_warning'] = 'You are logged in a staff member, if you want to reply to the ticket as staff, you must make reply via the admin area.';
+
+# Version 3.1.2
+$lang['allow_non_admin_members_to_delete_tickets_and_replies'] = 'Allow non-admin staff members to delete tickets and replies';
+$lang['default_filter_info'] = 'The filter will be marked as default only for your account.';
+$lang['required_register_fields'] = 'Required fields for registration (customers area)';
+
+# Version 3.1.6
+$lang['allow_non_admin_members_to_edit_ticket_messages'] = 'Allow non-admin staff members to delete tickets and replies';
+$lang['proposal_auto_convert_to_invoice_on_client_accept'] = 'Auto convert the proposal to invoice after client accept (only customers related proposals)';
+$lang['invoice_activity_auto_converted_from_proposal']      = 'Invoice auto created from proposal with number %s';
+$lang['clients_proposal_invoiced_successfully'] = 'Thank you for accepting the proposal. Please review the created invoice for the proposal';
+
+# Version 3.2.0
+$lang['ideal_payment_failure_message'] = 'The payment failed or was canceled.';
+$lang['ideal_api_publishable_key'] = 'Stripe Publishable Key';
+$lang['ideal_api_secret_key'] = 'Stripe API Secret Key';
+$lang['filters'] = 'Filters';
+$lang['view_financial_stats'] = 'View Financial Stats';
+$lang['timesheet_summary'] = 'Timesheet Summary';
+$lang['timesheet_detailed_overview'] = 'Detailed Overview of Logged Timesheets and Hours';
+$lang['ticket_request_history'] = 'Request History';
+$lang['integrations'] = 'Integrations';
+$lang['settings_group_other'] = 'Other';
+$lang['settings_group_configure_features'] = 'Configure Features';
+$lang['disable_ticket_public_url'] = 'Disable Ticket Public URL';
+
+# Version 3.2.1
+$lang['ideal_gateway_keys_not_configured'] = 'iDEAL Payment Gateway API not configured.';
+$lang['ideal_gateway_cannot_be_activated_keys_not_configured'] = 'iDEAL Payment Gateway cannot be activated as the Stripe Publishable/API key is not configured.';
+$lang['company_logo_light'] = 'Company Logo Light';
+$lang['welcome_back_sign_in'] = 'Welcome, please sign in to your dashboard';
+
+# Version 3.3.0
+$lang['settings_ai'] = 'AI';
+$lang['settings_group_ai'] = 'AI Integration';
+$lang['settings_ai_general'] = 'General';
+$lang['settings_ai_provider'] = 'Provider';
+$lang['settings_ai_system_prompt'] = 'System Prompt';
+$lang['settings_ai_system_prompt_help'] = 'Provide context about your company and how you handle support tickets to help AI generate better responses.';
+$lang['settings_ai_enable_ticket_summarization'] = 'Enable Ticket Summarization';
+$lang['settings_ai_enable_ticket_summarization_help'] = 'Enable the AI ticket summary feature to automatically generate a summary of the ticket conversation.';
+$lang['settings_ai_enable_ticket_reply_suggestions'] = 'Enable Ticket Reply Suggestion';
+$lang['settings_ai_enable_ticket_reply_suggestions_help'] = 'Enable the AI ticket reply suggestion to automatically generate a reply to the customer based on the tickets conversation.';
+$lang['ticket_summarization_disabled'] = 'Ticket summarization is disabled';
+$lang['ticket_reply_suggestion_disabled'] = 'Ticket reply suggestions is disabled';
+
+$lang['openai_api_key'] = 'OpenAI API Key';
+$lang['openai_model'] = 'OpenAI Model';
+$lang['openai'] = 'OpenAI';
+$lang['ticket_summarize_ai'] = 'Summarize (AI)';
+$lang['ticket_suggest_reply'] = 'Suggest Reply (AI)';
+$lang['ticket_rephrase_reply'] = 'Rephrase (AI)';
+$lang['ai_ticket_summary'] = 'Ticket Summary (AI)';
+$lang['openai_max_token'] = 'Max Output Tokens';
+$lang['warn_ticket_thread_too_long'] = 'This ticket contains a significant amount of information. Processing such a long ticket may require more input tokens, which could potentially impact the accuracy or efficiency of the response. Would you like to proceed with this request?';
+$lang['text_enhancement_make_friendly'] = 'Make more friendly';
+$lang['text_enhancement_make_formal'] = 'Make more formal';
+$lang['text_enhancement_make_polite'] = 'Make more polite';
+
+$lang['openai_fine_tuning']          = 'OpenAI Fine-Tuning';
+$lang['fine_tuning_source_data']     = 'Source Data for Fine-Tuning';
+$lang['available_articles']          = 'Available Articles';
+$lang['fine_tuning_min_articles']    = 'You need at least 10 knowledge base articles for fine-tuning.';
+$lang['start_fine_tuning']           = 'Start Fine-Tuning';
+$lang['last_fine_tuning_job']        = 'Last Fine-Tuning Job';
+$lang['job_id']                      = 'Job ID';
+$lang['status']                      = 'Status';
+$lang['fine_tuned_model']            = 'Fine-Tuned Model';
+$lang['created_at']                  = 'Created At';
+$lang['finished_at']                 = 'Finished At';
+$lang['loading_job_status']          = 'Loading job status...';
+$lang['refresh_status']              = 'Refresh Status';
+$lang['fine_tuned_models']           = 'Fine-Tuned Models';
+$lang['enable_fine_tuning']          = 'Enable Fine-Tuning';
+$lang['no_fine_tuned_models']        = 'No fine-tuned models available yet.';
+$lang['model_id']                    = 'Model ID';
+$lang['owned_by']                    = 'Owned By';
+$lang['options']                     = 'Options';
+$lang['active']                      = 'Active';
+$lang['set_as_active']               = 'Set as Active';
+$lang['processing']                  = 'Processing...';
+$lang['error_processing_request']    = 'Error processing request';
+$lang['fine_tuning_completed']       = 'Fine-tuning completed successfully!';
+$lang['fine_tuning_enabled']         = 'Fine-tuning has been enabled';
+$lang['fine_tuning_disabled']        = 'Fine-tuning has been disabled';
+$lang['fine_tuned_model_set']        = 'Fine-tuned model has been set as active';
+$lang['confirm_delete_fine_tuned_model'] = 'Are you sure you want to delete this fine-tuned model? This action cannot be undone.';
+$lang['fine_tuned_model_deleted']    = 'Fine-tuned model has been deleted';
+$lang['fine_tuned_model_delete_failed'] = 'Failed to delete fine-tuned model';
+$lang['fine_tuning_base_model']      = 'Fine-Tuning Base Model';
+$lang['fine_tuning_base_model_description'] = 'This is the base model that will be used for fine-tuning. Different models have different capabilities and price points.';
+$lang['advanced_features']           = 'Advanced Features';
+$lang['openai_fine_tuning_description'] = 'Fine-tune OpenAI models with your knowledge base and predefined replies content for more accurate responses.';
+$lang['retrain_model']               = 'Re-Train Model';
+$lang['retrain_model_description']   = 'Create a new fine-tuned model with the latest content. Previous fine-tuned models will be deleted.';
+$lang['model_is_recommended'] = 'Recommended';

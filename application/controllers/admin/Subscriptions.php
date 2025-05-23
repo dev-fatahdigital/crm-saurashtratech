@@ -15,27 +15,29 @@ class Subscriptions extends AdminController
 
     public function index()
     {
-        if (!has_permission('subscriptions', '', 'view') && !has_permission('subscriptions', '', 'view_own')) {
+        if (staff_cant('view', 'subscriptions') && staff_cant('view_own', 'subscriptions')) {
             access_denied('Subscriptions View');
         }
 
         close_setup_menu();
 
         $data['title'] = _l('subscriptions');
+        $data['table'] = App_table::find('subscriptions');
         $this->load->view('admin/subscriptions/manage', $data);
     }
 
     public function table()
     {
-        if (!has_permission('subscriptions', '', 'view') && !has_permission('subscriptions', '', 'view_own')) {
+        if (staff_cant('view', 'subscriptions') && staff_cant('view_own', 'subscriptions')) {
             ajax_access_denied();
         }
-        $this->app->get_table_data('subscriptions');
+
+        App_table::find('subscriptions')->output();
     }
 
     public function create()
     {
-        if (!has_permission('subscriptions', '', 'create')) {
+        if (staff_cant('create', 'subscriptions')) {
             access_denied('Subscriptions Create');
         }
 
@@ -77,7 +79,7 @@ class Subscriptions extends AdminController
             $data['customer_id'] = $this->input->get('customer_id');
         }
 
-        $data['title'] = _l('add_new', _l('subscription_lowercase'));
+        $data['title'] = _l('add_new', _l('subscription'));
 
         $data['taxes']      = $this->taxes_model->get();
         $data['currencies'] = $this->currencies_model->get();
@@ -87,13 +89,13 @@ class Subscriptions extends AdminController
 
     public function edit($id)
     {
-        if (!has_permission('subscriptions', '', 'view') && !has_permission('subscriptions', '', 'view_own')) {
+        if (staff_cant('view', 'subscriptions') && staff_cant('view_own', 'subscriptions')) {
             access_denied('Subscriptions View');
         }
 
         $subscription = $this->subscriptions_model->get_by_id($id);
 
-        if (!$subscription || (!has_permission('subscriptions', '', 'view') && $subscription->created_from != get_staff_user_id())) {
+        if (! $subscription || (staff_cant('view', 'subscriptions') && $subscription->created_from != get_staff_user_id())) {
             show_404();
         }
 
@@ -104,7 +106,7 @@ class Subscriptions extends AdminController
         $stripeSubscriptionId = $subscription->stripe_subscription_id;
 
         if ($this->input->post()) {
-            if (!has_permission('subscriptions', '', 'edit')) {
+            if (staff_cant('edit', 'subscriptions')) {
                 access_denied('Subscriptions Edit');
             }
 
@@ -121,11 +123,10 @@ class Subscriptions extends AdminController
                 'stripe_tax_id'       => $this->input->post('stripe_tax_id') ? $this->input->post('stripe_tax_id') : false,
                 'stripe_tax_id_2'     => $this->input->post('stripe_tax_id_2') ? $this->input->post('stripe_tax_id_2') : false,
                 'currency'            => $this->input->post('currency'),
-             ];
+            ];
 
-            if (!empty($stripeSubscriptionId)) {
-                unset($update['clientid']);
-                unset($update['date']);
+            if (! empty($stripeSubscriptionId)) {
+                unset($update['clientid'], $update['date']);
             }
 
             try {
@@ -150,19 +151,20 @@ class Subscriptions extends AdminController
             $this->load->library('stripe_core');
             $data['stripe_tax_rates'] = $this->stripe_core->get_tax_rates();
 
-            if (!empty($subscription->stripe_subscription_id)) {
+            if (! empty($subscription->stripe_subscription_id)) {
                 $data['stripeSubscription'] = $this->stripe_subscriptions->get_subscription($subscription->stripe_subscription_id);
 
                 /*                              $data['stripeSubscription']->billing_cycle_anchor = 'now';
                                               $data['stripeSubscription']->save();
                                               die;*/
 
-                if ($subscription->status != 'canceled' && $subscription->status !== 'incomplete_expired') {
+                if ($subscription->status != 'canceled' && $subscription->status !== 'incomplete_expired' && ! $subscription->ends_at) {
                     $data['upcoming_invoice'] = $this->stripe_subscriptions->get_upcoming_invoice($subscription->stripe_subscription_id);
 
                     $data['upcoming_invoice'] = subscription_invoice_preview_data($subscription, $data['upcoming_invoice'], $data['stripeSubscription']);
+
                     // Throwing errors when not set in the invoice preview area
-                    if (!isset($data['upcoming_invoice']->include_shipping)) {
+                    if (! isset($data['upcoming_invoice']->include_shipping)) {
                         $data['upcoming_invoice']->include_shipping = 0;
                     }
                 }
@@ -188,7 +190,7 @@ class Subscriptions extends AdminController
 
     public function send_to_email($id)
     {
-        if (!has_permission('subscriptions', '', 'view')) {
+        if (staff_cant('view', 'subscriptions')) {
             access_denied('Subscription Send To Email');
         }
 
@@ -205,13 +207,13 @@ class Subscriptions extends AdminController
 
     public function cancel($id)
     {
-        if (!has_permission('subscriptions', '', 'edit')) {
+        if (staff_cant('edit', 'subscriptions')) {
             access_denied('Cancel Subscription');
         }
 
         $subscription = $this->subscriptions_model->get_by_id($id);
 
-        if (!$subscription) {
+        if (! $subscription) {
             show_404();
         }
 
@@ -220,7 +222,7 @@ class Subscriptions extends AdminController
             $ends_at = time();
             if ($type == 'immediately') {
                 $this->stripe_subscriptions->cancel($subscription->stripe_subscription_id);
-            // The mail sent via the webhook
+                // The mail sent via the webhook
                 // $this->subscriptions_model->send_email_template($subscription->id, '', 'subscription_cancelled_to_customer');
             } elseif ($type == 'at_period_end') {
                 $ends_at = $this->stripe_subscriptions->cancel_at_end_of_billing_period($subscription->stripe_subscription_id);
@@ -247,7 +249,7 @@ class Subscriptions extends AdminController
 
     public function sync()
     {
-        if (!is_admin()) {
+        if (! is_admin()) {
             access_denied('Sync subscriptions');
         }
 
@@ -260,12 +262,12 @@ class Subscriptions extends AdminController
 
     public function resume($id)
     {
-        if (!has_permission('subscriptions', '', 'edit')) {
+        if (staff_cant('edit', 'subscriptions')) {
             access_denied('Resume Subscription');
         }
 
         $subscription = $this->subscriptions_model->get_by_id($id);
-        if (!$subscription) {
+        if (! $subscription) {
             show_404();
         }
 
@@ -281,12 +283,12 @@ class Subscriptions extends AdminController
 
     public function delete($id)
     {
-        if (!has_permission('subscriptions', '', 'delete')) {
+        if (staff_cant('delete', 'subscriptions')) {
             access_denied('Subscriptions Delete');
         }
 
         if ($subscription = $this->subscriptions_model->delete($id)) {
-            if (!empty($subscription->stripe_subscription_id)) {
+            if (! empty($subscription->stripe_subscription_id)) {
                 try {
                     // In case already deleted in Stripe
                     $this->stripe_subscriptions->cancel($subscription->stripe_subscription_id);
@@ -298,10 +300,6 @@ class Subscriptions extends AdminController
             set_alert('warning', _l('problem_deleting', _l('subscription')));
         }
 
-        if (strpos($_SERVER['HTTP_REFERER'], 'clients/') !== false) {
-            redirect($_SERVER['HTTP_REFERER']);
-        } else {
-            redirect(admin_url('subscriptions'));
-        }
+        redirect(previous_url() ?: $_SERVER['HTTP_REFERER']);
     }
 }

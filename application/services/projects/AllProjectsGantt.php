@@ -44,7 +44,7 @@ class AllProjectsGantt extends AbstractGantt
 
     protected function queryProjectsForStatus($id)
     {
-        if (!has_permission('projects', '', 'view')) {
+        if (staff_cant('view', 'projects')) {
             $this->ci->db->where(db_prefix() . 'projects.id IN (SELECT project_id FROM ' . db_prefix() . 'project_members WHERE staff_id=' . get_staff_user_id() . ')');
         }
 
@@ -63,7 +63,7 @@ class AllProjectsGantt extends AbstractGantt
         $row               = [];
         $row['id']         = 'proj_' . $project['id'];
         $row['project_id'] = $project['id'];
-        $row['name']       = $project['name'];
+        $row['name']       = e($project['name']);
         $row['progress']   = 0;
         $row['start']      = date('Y-m-d', strtotime($project['start_date']));
 
