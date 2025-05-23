@@ -1,7 +1,7 @@
 /*!
  * Internal App Plugin for validation that extends jQuery Validation plugin.
  *
- * https://exampleperfexcrm.com/
+ * https://resolveworkcrm.com/
  *
  * Copyright (c) 2019 Marjan Stojanov
  */
