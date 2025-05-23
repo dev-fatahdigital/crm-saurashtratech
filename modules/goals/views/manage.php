@@ -4,8 +4,8 @@
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                <?php if (has_permission('goals', '', 'create')) { ?>
-                <div class="tw-mb-2 sm:tw-mb-4">
+                <?php if (staff_can('create',  'goals')) { ?>
+                <div class="tw-mb-2">
                     <a href="<?php echo admin_url('goals/goal'); ?>" class="btn btn-primary">
                         <i class="fa-regular fa-plus tw-mr-1"></i>
                         <?php echo _l('new_goal'); ?>
